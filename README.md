@@ -1,5 +1,5 @@
 # Traineeship-App
-A traineeship app built in Springboot framework wtih Java and MySQL database for the course MYY803 of CSE UOI
+A traineeship app built in Springboot framework wtih Java and MySQL database for the course MYY803 Software Engineering  of CSE UOI
 
 ## Contributors:
 
@@ -9,11 +9,9 @@ A traineeship app built in Springboot framework wtih Java and MySQL database for
 
 * Omiros Chatziiordanis
 
-## Notes for the delivery of the project
+## Notes for explanation of the project
 
-- The src and data folders that have been asked in the project requirements, are represented by the countries_football_stats and the db folders respectively.
-- The project report and video can be found on the deliverables folder.
-- The video has been given through a link to a google drive repository.
+The projects documentation is included in the SprintReport-v1.pdf
 
 ## Important steps to run the app
 
