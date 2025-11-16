@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Traineeship Offers</title>
+</head>
+<body>
+<div class="container">
+  <h3>Available Traineeship Offers</h3>
+  <hr>
+  
+  <div th:if="${offers.empty}" class="alert alert-info">
+        No matching offers found for this student.
+    </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Description</th>
+      <th>Skills</th>
+      <th>Topics</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="offer : ${offers}">
+      <td th:text="${offer.id}" />
+      <td th:text="${offer.start}" />
+      <td th:text="${offer.end}" />
+      <td th:text="${offer.description}" />
+      <td th:text="${offer.skills}" />
+      <td th:text="${offer.topics}" />
+      <td>
+      	<form th:action="@{/committee/assign_student_to_position}" method="post">
+          <input type="hidden" name="student_id" th:value="${student_id}">
+          <input type="hidden" name="position_id" th:value="${offer.traineeshipPosition.id}">
+          <button type="submit" class="btn btn-primary btn-sm">
+            Assign to position
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a th:href="@{/committee/interested_students_list}" class="btn btn-secondary">Back</a>
+</div>
+</body>
+</html>

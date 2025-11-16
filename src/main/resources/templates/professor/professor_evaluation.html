@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Professor's Evaluation</title>
+</head>
+<body>
+<div class="container">
+  <h3>Professor's Evaluation</h3>
+  <hr>
+
+  <form action="#" th:action="@{/professor/supervised_positions/evaluate/save}" th:object="${evaluation}" method="POST">
+
+    <input type="hidden" th:field="*{traineeshipPositionId}" />
+    <input type="hidden" name="traineeshipId" th:value="*{traineeshipPositionId}" />
+
+    <label>Motivation Grade:</label>
+    <select th:field="*{motivationGrade}" class="form-control mb-3" th:disabled="${grade.name() != 'NOT_MARKED'}">
+      <th:block th:each="mark : ${marks}">
+        <option th:value="${mark}" th:text="${mark}"></option>
+      </th:block>
+    </select>
+
+    <label>Efficiency Grade:</label>
+    <select th:field="*{efficiencyGrade}" class="form-control mb-3" th:disabled="${grade.name() != 'NOT_MARKED'}">
+      <th:block th:each="mark : ${marks}">
+        <option th:value="${mark}" th:text="${mark}"></option>
+      </th:block>
+    </select>
+
+    <label>Effectiveness Grade:</label>
+    <select th:field="*{effectivenessGrade}" class="form-control mb-3" th:disabled="${grade.name() != 'NOT_MARKED'}">
+      <th:block th:each="mark : ${marks}">
+        <option th:value="${mark}" th:text="${mark}"></option>
+      </th:block>
+    </select>
+
+    <label>Facilities Grade:</label>
+    <select th:field="*{facilitiesGrade}" class="form-control mb-3" th:disabled="${grade.name() != 'NOT_MARKED'}">
+      <th:block th:each="mark : ${marks}">
+        <option th:value="${mark}" th:text="${mark}"></option>
+      </th:block>
+    </select>
+
+    <label>Guidance Grade:</label>
+    <select th:field="*{guidanceGrade}" class="form-control mb-3" th:disabled="${grade.name() != 'NOT_MARKED'}">
+      <th:block th:each="mark : ${marks}">
+        <option th:value="${mark}" th:text="${mark}"></option>
+      </th:block>
+    </select>
+
+    <button type="submit" class="btn btn-info" th:if="${grade.name() == 'NOT_MARKED'}">Submit Evaluation</button>
+  </form>
+
+  <hr>
+  <a th:href="@{/professor/supervised_positions}" class="btn btn-secondary">Back to Supervised Positions</a>
+</div>
+</body>
+</html>

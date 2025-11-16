@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Supervised Traineeships</title>
+</head>
+<body>
+<div class="container">
+    <h3>Supervised Traineeships</h3>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Student ID</th>
+            <th>Company ID</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="traineeship : ${supervisedTraineeships}">
+            <td th:text="${traineeship.id}" />
+            <td th:text="${traineeship.student.name}" />
+            <td th:text="${traineeship.company.name}" />
+            <td>
+                <a th:href="@{/professor/supervised_positions/evaluate(traineeshipId=${traineeship.id})}" class="btn btn-primary btn-sm">Evaluate</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/professor/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+</body>
+</html>

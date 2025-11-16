@@ -1,0 +1,1 @@
+To create the database that is necessary, run the scripts in the sql_scripts folder. Else you can change the hibernate in the application properties, from none to create FOR THE FIRST RUN ONLY.

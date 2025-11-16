@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Traineeship Offers</title>
+</head>
+<body>
+<div class="container">
+  <h3>Traineeship Positions Without Supervisor</h3>
+  <hr>
+  
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Student</th>
+      <th>Professor</th>
+      <th>Company</th>
+      <th>Mark</th>
+      <th>Find Professors</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="traineeship : ${traineeships_without_supervisor}">
+      <td th:text="${traineeship.id}" />
+      <td th:text="${traineeship.student.name}" />
+      <td>Not Assigned</td>
+      <td th:text="${traineeship.company.name}" />
+      <td th:text="${traineeship.mark}" />
+      <td><a th:href="@{/committee/show_matching_professors(position_id=${traineeship.id}, strategy='Interests')}"
+           class="btn btn-primary btn-sm">
+          By Interests
+        </a>
+        <a th:href="@{/committee/show_matching_professors(position_id=${traineeship.id}, strategy='Supervisee Number')}"
+           class="btn btn-primary btn-sm">
+          By Number of Trainees
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3>Traineeship Positions In Progress</h3>
+  <hr>
+  
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Student</th>
+      <th>Professor</th>
+      <th>Company</th>
+      <th>Mark</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="traineeship : ${traineeships_without_marks}">
+      <td th:text="${traineeship.id}" />
+      <td th:text="${traineeship.student.id}" />
+      <td th:text="${traineeship.professor.id}"/>
+      <td th:text="${traineeship.company.id}" />
+      <td th:text="${traineeship.mark}" />
+      <td> 
+      	<a th:href="@{/committee/show_traineeship_for_marking(position_id=${traineeship.id})}"
+           class="btn btn-primary btn-sm">
+          Grade it
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/committee/dashboard}" class="btn btn-secondary">Back</a>
+</div>
+</body>
+</html>

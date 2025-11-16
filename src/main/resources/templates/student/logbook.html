@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+          crossorigin="anonymous">
+
+    <title>Logbook</title>
+</head>
+
+<body>
+    <div class="container">
+        <h4 class="mb-4">Traineeship Logbooks</h4>
+
+        <div th:each="traineeship : ${traineeships}">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 th:text="'Position at: ' + ${traineeship.company.name} + ' with Supervisor: ' + ${traineeship.professor?.name ?: 'No professor assigned'} + ' and ID: ' + ${traineeship.id}"></h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/student/save_logbook}" method="POST">
+                        <input type="hidden" name="id" th:value="${traineeship.id}" />
+                        
+                        <div class="form-group">
+                            <label>Logbook Entries</label>
+                            <textarea name="logbook" class="form-control" rows="8"
+                                      th:text="${traineeship.logbook}"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" th:if="${traineeship.mark.name() == 'NOT_MARKED'}">Save Logbook</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <a th:href="@{/student/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

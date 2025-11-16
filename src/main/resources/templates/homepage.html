@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <!-- Add Thymeleaf security namespace -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+          crossorigin="anonymous">
+
+    <title>Traineeship App</title>
+</head>
+
+<body>
+<div class="container">
+    <h2>Welcome to TraineeshipApp!</h2>
+
+    <br> <br> <hr> <br> <br>
+
+    <div sec:authorize="!isAuthenticated()">
+        <p>
+            <a th:href="@{/login}" class="btn btn-primary btn-sm mb-3">Login</a>
+            <a th:href="@{/register}" class="btn btn-primary btn-sm mb-3">Register</a>
+        </p>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <h4>Logged as: <span sec:authentication="name"></span></h4>
+        <h4>Has role: <span sec:authentication="authorities"></span></h4>
+
+        <br> <br> <hr> <br> <br>
+
+        <div sec:authorize="hasAuthority('ROLE_STUDENT')">
+            <a th:href="@{/student/dashboard}" class="btn btn-primary btn-sm mb-3">Student Dashboard</a>
+        </div>
+        
+        <div sec:authorize="hasAuthority('ROLE_PROFESSOR')">
+            <a th:href="@{/professor/dashboard}" class="btn btn-primary btn-sm mb-3">Professor Dashboard</a>
+        </div>
+        
+        <div sec:authorize="hasAuthority('ROLE_COMPANY')">
+            <a th:href="@{/company/dashboard}" class="btn btn-primary btn-sm mb-3">Company Dashboard</a>
+        </div>
+        
+        <div sec:authorize="hasAuthority('ROLE_COMMITTEE')">
+            <a th:href="@{/committee/dashboard}" class="btn btn-primary btn-sm mb-3">Committee Dashboard</a>
+        </div>
+
+        <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+    </div>
+</div>
+</body>
+
+</html>

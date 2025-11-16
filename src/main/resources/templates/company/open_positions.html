@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Traineeship Offers</title>
+</head>
+<body>
+<div class="container">
+  <h3>Traineeship Offers and Positions by the Company</h3>
+  <hr>
+
+  <!-- Add Offer Button -->
+  <a th:href="@{/company/open_positions/new}" class="btn btn-primary btn-sm mb-3">
+    Add New Offer
+  </a>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Offer ID</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Description</th>
+      <th>Skills</th>
+      <th>Topics</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="offer : ${offers}">
+      <td th:text="${offer.id}" />
+      <td th:text="${offer.start}" />
+      <td th:text="${offer.end}" />
+      <td th:text="${offer.description}" />
+      <td th:text="${offer.skills}" />
+      <td th:text="${offer.topics}" />
+      <td>
+        <a th:href="@{/company/open_positions/delete_offer(offer_id=${offer.id})}"
+           class="btn btn-danger btn-sm"
+           onclick="return confirm('Are you sure you want to delete this offer?');">
+          Delete
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Position ID</th>
+      <th>Student</th>
+      <th>Professor</th>
+      <th>Mark</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="position : ${positions}">
+      <td th:text="${position.id}" />
+      <td th:text="${position.student != null} ? ${position.student.name} : 'No student assigned'" />
+      <td th:text="${position.professor != null} ? ${position.professor.name} : 'No professor assigned'" />
+      <td th:text="${position.mark}" />
+      <td>
+        <a th:href="@{/company/open_positions/delete_position(position_id=${position.id})}"
+           class="btn btn-danger btn-sm"
+           onclick="return confirm('Are you sure you want to delete this position?');">
+          Delete
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a th:href="@{/company/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+</body>
+</html>

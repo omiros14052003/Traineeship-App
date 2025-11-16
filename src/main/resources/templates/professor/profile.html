@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+          crossorigin="anonymous">
+
+    <title>Professor Profile</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Professor Profile</p>
+
+        <form action="#" th:action="@{/professor/save_profile}" th:object="${professor}" method="POST">
+            <!-- Hidden field for ID -->
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" th:field="*{name}" class="form-control" id="name" required>
+            </div>
+
+            <!-- Interests -->
+            <div class="form-group">
+                <label for="interests">Interests</label>
+                <input type="text" th:field="*{interests}" class="form-control" id="interests">
+			    <small class="form-text text-muted">Enter your Interests, separated by commas.</small>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+        </form>
+
+        <hr>
+        <a th:href="@{/professor/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

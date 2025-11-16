@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+          crossorigin="anonymous">
+
+    <title>Student Profile</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Student Profile</p>
+
+        <form action="#" th:action="@{/student/save_profile}" th:object="${student}" method="POST">
+            <!-- Hidden field for ID -->
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" th:field="*{name}" class="form-control" id="name" required>
+            </div>
+
+            <!-- University ID -->
+            <div class="form-group">
+                <label for="universityId">University ID</label>
+                <input type="number" th:field="*{universityId}" class="form-control" id="universityId" required>
+            </div>
+
+			<!-- Interests -->
+			    <div class="form-group">
+			        <label for="interests">Interests</label>
+			        <textarea th:field="*{interests}" class="form-control" id="interests" rows="3"></textarea>
+			        <small class="form-text text-muted">Enter your interests, separated by commas.</small>
+			    </div>
+			
+			    <!-- Skills -->
+			    <div class="form-group">
+			        <label for="skills">Skills</label>
+			        <textarea th:field="*{skills}" class="form-control" id="skills" rows="3"></textarea>
+			        <small class="form-text text-muted">Enter your skills, separated by commas.</small>
+			    </div>
+
+            <!-- Preferred Location -->
+            <div class="form-group">
+                <label for="location">Preferred Location</label>
+                <input type="text" th:field="*{location}" class="form-control" id="location">
+            </div>
+
+            <!-- Looking for Position -->
+            <div class="form-group">
+                <label for="lookingForPosition">Looking for Position</label>
+                <input type="checkbox" th:field="*{lookingForPosition}" class="form-control" id="lookingForPosition">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+        </form>
+
+        <hr>
+        <a th:href="@{/student/dashboard}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

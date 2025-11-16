@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Create Traineeship Offer</title>
+</head>
+<body>
+<div class="container">
+  <h3>Create a New Traineeship Offer</h3>
+  <hr>
+
+  <form action="#" th:action="@{/company/open_positions/save}" th:object="${traineeshipOffer}" method="POST">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Start Date:</label>
+    <input type="text" th:field="*{start}" class="form-control mb-3" placeholder="Start Date">
+
+    <label>End Date:</label>
+    <input type="text" th:field="*{end}" class="form-control mb-3" placeholder="End Date">
+
+    <label>Description:</label>
+    <input type="text" th:field="*{description}" class="form-control mb-3" placeholder="Description">
+
+    <label>Skills Required:</label>
+    <input type="text" th:field="*{skills}" class="form-control mb-3" placeholder="Skills">
+
+    <label>Topics Covered:</label>
+    <input type="text" th:field="*{topics}" class="form-control mb-3" placeholder="Topics">
+
+    <button type="submit" class="btn btn-info">Save Offer</button>
+  </form>
+
+  <hr>
+
+  <a th:href="@{/company/open_positions}" class="btn btn-secondary">Back to Open Positions</a>
+</div>
+</body>
+</html>

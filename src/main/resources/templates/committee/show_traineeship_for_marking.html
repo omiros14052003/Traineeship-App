@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Professors</title>
+</head>
+<body>
+<div th:if="${evaluation_company.motivationGrade == 0 or 
+                evaluation_company.efficiencyGrade == 0 or 
+                evaluation_company.effectivenessGrade == 0}"
+       class="alert alert-warning">
+    Warning: The company hasn't filled its evaluation!
+  </div>
+<div class="container">
+  <h3>Evaluation of Company</h3>
+  <hr>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Company</th>
+      <th>Motivation Grade</th>
+      <th>Efficiency Grade</th>
+      <th>Effectiveness Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${evaluation_company.evaluator.name}" />
+      <td th:text="${evaluation_company.motivationGrade}" />
+      <td th:text="${evaluation_company.efficiencyGrade}" />
+      <td th:text="${evaluation_company.effectivenessGrade}" />
+    </tbody>
+  </table>
+</div>
+
+<div th:if="${evaluation_professor.motivationGrade == 0 or 
+                evaluation_professor.efficiencyGrade == 0 or 
+                evaluation_professor.effectivenessGrade == 0 or
+                evaluation_professor.facilitiesGrade == 0 or
+                evaluation_professor.guidanceGrade == 0}"
+       class="alert alert-warning">
+    Warning: The professor hasn't filled his/her evaluation!
+  </div>
+
+<div class="container">
+  <h3>Evaluation of Professors</h3>
+  <hr>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Professor</th>
+      <th>Motivation Grade</th>
+      <th>Efficiency Grade</th>
+      <th>Effectiveness Grade</th>
+      <th>Facilities Grade</th>
+      <th>Guidance Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${evaluation_professor.evaluator.name}" />
+      <td th:text="${evaluation_professor.motivationGrade}" />
+      <td th:text="${evaluation_professor.efficiencyGrade}" />
+      <td th:text="${evaluation_professor.effectivenessGrade}" />
+      <td th:text="${evaluation_professor.facilitiesGrade}" />
+      <td th:text="${evaluation_professor.guidanceGrade}" />
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4 p-3 border-top text-center">
+  <h4>Grade the Traineeship</h4>
+  
+  <div class="mb-3">
+    <span>Suggested Mark: </span>
+    <span th:if="${avgGrade >= 2.5}" class="text-success font-weight-bold">PASS</span>
+    <span th:if="${avgGrade < 2.5}" class="text-danger font-weight-bold">FAIL</span>
+  </div>
+  
+  <form th:action="@{/committee/submit_traineeship_grade}" method="post" class="mt-3 d-flex flex-column align-items-center">
+    <div class="d-flex justify-content-center mb-2">
+      <div class="form-check form-check-inline mx-3">
+        <input class="form-check-input" type="radio" name="mark" id="pass" th:value= passed checked>
+        <label class="form-check-label" for="pass">Pass</label>
+      </div>
+      <div class="form-check form-check-inline mx-3">
+        <input class="form-check-input" type="radio" name="mark" id="fail" th:value= failed>
+        <label class="form-check-label" for="fail">Fail</label>
+      </div>
+    </div>
+    <input type="hidden" name="position_id" th:value="${position_id}">
+    <button type="submit" class="btn btn-success">Submit Grade</button>
+  </form>
+</div>
+
+<a th:href="@{/committee/traineeships_in_progress}" class="btn btn-secondary">Back</a>
+
+</body>
+</html>

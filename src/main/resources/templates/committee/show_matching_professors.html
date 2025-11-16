@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <title>Professors</title>
+</head>
+<body>
+<div class="container">
+  <h3>Available Professors</h3>
+  <hr>
+  
+  <div th:if="${professors.empty}" class="alert alert-info">
+        No matching professors found for this traineeship position.
+    </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>name</th>
+      <th>number of supervisees</th>
+      <!--<th>interests</th>-->
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="professor : ${professors}">
+      <td th:text="${professor.id}" />
+      <td th:text="${professor.name}" />
+      <td th:text="${professor.superviseeNum}" />
+      <td>
+      	<form th:action="@{/committee/assign_professor_to_traineeship_position}" method="post">
+          <input type="hidden" name="professor_id" th:value="${professor.id}">
+          <input type="hidden" name="position_id" th:value="${position_id}">
+          <button type="submit" class="btn btn-primary btn-sm">
+            Assign to position
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a th:href="@{/committee/traineeships_in_progress}" class="btn btn-secondary">Back</a>
+</div>
+</body>
+</html>
